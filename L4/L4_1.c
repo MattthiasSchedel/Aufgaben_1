@@ -1,27 +1,7 @@
 #include<stdio.h>
 
-/*Program that prints
-0
-0 1
-0 1 2
-0 1 2 3
-0 1 2 3 4
-0 1 2 3 4 5
-0 1 2 3 4 5 6
-0 1 2 3 4 5 6 7
-0 1 2 3 4 5 6 7 8
-0 1 2 3 4 5 6 7 8 9
-*
-* *
-* * *
-* * * *
-* * * * *
-* * * * * *
-* * * * * * *
-* * * * * * * *
-* * * * * * * * *
-* * * * * * * * * *
-by using two nested foor-loops*/
+/*Program that prints two left-bound triangles, one with numbers and
+the other one with stars, by using two nested foor-loops*/
 
 int main()
 {
