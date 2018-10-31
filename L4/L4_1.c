@@ -13,11 +13,12 @@ int main()
 		}
 		printf("\n");
 	}
-	for (int i = 0; i <= 9; i++) {
 
+	for (int i = 0; i <= 9; i++) 
+	{
 		for (int f = 0; f <= i; f++)
 		{
-			printf("* ");
+			printf("*");
 		}
 		printf("\n");
 	}

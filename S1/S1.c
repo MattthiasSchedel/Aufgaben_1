@@ -7,9 +7,14 @@ main()
 	float X, K, i = 1;
 	char C, a;
 	printf("Simple calculator:\nValid inputs are + -*/ = and digits 0, ..., 9\n");
-	a = _getwch();
+
+	do
+	{ 
+		a = _getwch();		
+	} while ((a < 48) || (a > 57));
 	K = a - '0';
 	printf("%.0f", K);
+
 	do
 	{
 		do
@@ -36,7 +41,7 @@ main()
 			{
 				a = _getwch();
 				X = a - '0';
-				if ((X == 1) || (X == 2) || (X == 3) || (X == 4) || (X == 5) || (X == 6) || (X == 7) || (X == 8) || (X == 9) || (X == 0))
+				if ((a>=48)&&(a<=57))
 				{
 					printf("%.0f", X);
 					i = 3;

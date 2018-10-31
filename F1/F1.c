@@ -1,6 +1,7 @@
 #include<conio.h>
 #include<stdio.h>
 
+//Float function to calculate sum and average;
 float statistics(int one,int two,int three)
 {
 	float s = one + two + three;

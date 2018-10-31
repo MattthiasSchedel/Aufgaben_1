@@ -14,6 +14,8 @@ int main()
 		scanf_s("%d", &X);
 		printf("Enter upper border:");
 		scanf_s("%d", &Y);
+		//X=lower border Y=upper border
+
 		if (X != Y)
 		{
 			printf("I will generate 10 numbers between %d and %d...\n", X, Y);
