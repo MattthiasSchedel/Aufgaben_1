@@ -1,62 +1,40 @@
 #include<conio.h>
 #include<stdio.h>
 #include<stdlib.h>
-#include<Windows.h>
 
-void set_cursor_position(int x, int y)
+int Board[1200];
+
+init_board(int X, int Y)
 {
-	//Initialize the coordinates
-	COORD coord = { x, y };
-	//Set the position
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-
-}
-
-init_board()
-{
-	int k = 1, X = 20, Y = 60, l = 1;
-	//Rectangle printed by if statment in while loop
-	while (k <= X)
+	for (int i = 0; i < (X*Y); i++)
 	{
-		//Prints top and bottom row
-		if (((k == 1) || (k == X)) && (l <= Y))
+		if ((i < X - 1) || (i % X == 0) || (i > (X*Y) - X))
 		{
 			printf("#");
-			l++;
+			Board[i+1] = 1;
 		}
-		//Prints left and right walls
-		else if (((k > 1) || (k < X)) && ((l == Y) || (l == 1)))
+		else if (i % X == X - 1)
 		{
-			printf("#");
-			l++;
+			printf("#\n");
+			Board[i+1] = 1;
 		}
-		//Prints volume of rectangle
-		else if (((k > 1) || (k > X)) && ((l < Y) && (l > 1)))
+		else 
 		{
 			printf(" ");
-			l++;
+			Board[i+1] = 0;
 		}
-		//Prints new line 
-		else if (l > Y)
-		{
-			k++;
-			l = 1;
-			printf("\n");
-		}
-
 	}
 }
 
-void Blocks(int r)
+void Blocks(int X, int Y)
 {
-	int ran = r % 4, Len = ran + 2, X = r % 56, Y = r % 15;
-
-	for (int i = 1; i <= Len; i++)
+	int Rand = rand(), r = (Rand % 4) + 3, E=Rand%(X*Y);
+	for (int g = 0; g < r; g++)
 	{
-		set_cursor_position(X, Y+i);
-		for (int g = 1; g <= Len; g++)
+		E = E + g * (Y - r);
+		for (int i = 0; i < r; i++)
 		{
-			printf("#");
+			Board[E + i] = Board[E + i] | 1;
 		}
 	}
 }
@@ -66,18 +44,21 @@ void Blocks(int r)
 void main()
 {
 	char c;
+	int X = 60, Y = 20;
 	do
 	{
 		system("cls");
-		init_board();
+		init_board(X, Y);
 		for (int i = 1; i <= 20; i++)
 		{
-			int Rand = rand();
-			Blocks(Rand);
+			Blocks(X, Y);
 		}
-		set_cursor_position(20, 21);
+		printf("\n");
+		for (int i = 1; i <= (X*Y); i++)
+		{
+			printf("%d", Board[i]);
+		}
 		printf("another one?(y)");
 		c = _getwch();
 	} while (c == 'y');
-	_getch();
 }
