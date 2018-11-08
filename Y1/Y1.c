@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int Board[1200];
+Board[1200];
 
 init_board(int X, int Y)
 {
@@ -49,12 +49,7 @@ void main()
 		for (int i = 1; i <= 20; i++)
 		{
 			Blocks(X, Y);
-		}
-		/*printf("\n");
-		for (int i = 1; i <= (X*Y); i++)
-		{
-			printf("%d", Board[i]);
-		}*/
+		}	
 		printer(X, Y);
 
 		printf("another one?(y)");

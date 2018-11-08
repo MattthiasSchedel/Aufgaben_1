@@ -1,26 +1,43 @@
 #include<stdio.h>
 #include<conio.h>
-#include<time.h>
 
-int Fn = 0, Fn1 = 1, Fn2 = 1;
-int fibonacci_recursive(int n)
-{	
-	if (n < 2)
-		return n;
-	else
-		return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2);	
+int fibonacci_resurvive(fib)
+{
+	int z;
+	if ((fib == 1) || (fib == 0))
+		return fib;	
+	else	
+		z = fibonacci_resurvive(fib-2) + fibonacci_resurvive(fib-1);	
+	return z;
 }
 
-void main()
+int fiboloop(fib)
 {
-	int n;
-	printf("Enter the Number n:");
-	scanf_s("%d", &n);
-	clock_t t0 = clock();
-	printf("F(%d)  is according to fibonacci_recursive() %d\n\n", n, fibonacci_recursive(n));
-	clock_t t1 = clock();
-	clock_t av = t1 - t0;
-	printf("%Lf"),av;
+	int one = 1, null = 0, z;
+	if ((fib == 1) || (fib == 0))
+		return fib;
+	else
+		for (int i = 1; i < fib; i++)
+		{
+			z = one + null;
+			null = one;
+			one = z;
+		}
+	return z;
+}
 
-	_getch();
+int main()
+{
+	int c;
+	do
+	{
+		int enter, out;
+		printf("Enter the fib:");
+		scanf_s("%d", &enter);
+		out = fibonacci_resurvive(enter);
+		printf("%d\n", out);
+		out = fiboloop(enter);
+		printf("%d\n\n", out);
+		c = _getwch();
+	} while (c == 'y');
 }
