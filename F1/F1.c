@@ -2,11 +2,10 @@
 #include<stdio.h>
 
 //Float function to calculate sum and average;
-float statistics(int one,int two,int three)
+float statistics(int one,int two,int three, float*s,float*a)
 {
 	*s = one + two + three;
-	*a = s / 3;	
-	printf("sum=%.0f avg=%.2f\n", s, a);
+	*a = *s / 3;	
 }
 
 
@@ -19,8 +18,8 @@ void main()
 		{
 			for (int three = 0; three <= 5; three++)
 			{
-				statistics(one, two, three);
-				printf("n1=%d n2=%d n3=%d --> sum=%f avg=%f", one, two, three, s, a);				
+				statistics(one, two, three,&s,&a);
+				printf("n1=%d n2=%d n3=%d --> sum=%.2f avg=%.2f\n", one, two, three, s, a);				
 			}
 		}
 	}

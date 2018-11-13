@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<conio.h>
+#include<time.h>
 
+//recursive function
 int fibonacci_resurvive(fib)
 {
 	int z;
@@ -10,8 +12,8 @@ int fibonacci_resurvive(fib)
 		z = fibonacci_resurvive(fib-2) + fibonacci_resurvive(fib-1);	
 	return z;
 }
-
-int fiboloop(fib)
+//loop  in the function
+int fibonacci_iterative(fib)
 {
 	int one = 1, null = 0, z;
 	if ((fib == 1) || (fib == 0))
@@ -31,13 +33,31 @@ int main()
 	int c;
 	do
 	{
-		int enter, out;
+		//get user input F
+		int enter, out, start, end, one, two;
 		printf("Enter the fib:");
 		scanf_s("%d", &enter);
+
+		//Use recursuve fuction to calculate fibonacci numebr
+		start = clock();
 		out = fibonacci_resurvive(enter);
-		printf("%d\n", out);
-		out = fiboloop(enter);
-		printf("%d\n\n", out);
+		end = clock();
+		printf("F(%d)  is according to fibonacci_recursive()%d\n",enter, out);
+		one = end - start;
+
+		//Use loop to calculate fibonacci number
+		start = clock();
+		out = fibonacci_iterative(enter);
+		end = clock();
+		printf("F(%d)  is according to fibonacci_iterative()%d\n", enter, out);
+		two = end - start;
+		
+		//output of time used to calculate with functions
+		printf("fibonacci_recursive() took %.3fs\n",one/1000.0f);
+		printf("fibonacci_iterative() took %.3fs\n\n",two/1000.0f);
+
+		//loop statement
+		printf("go again?(y)");
 		c = _getwch();
 	} while (c == 'y');
 }

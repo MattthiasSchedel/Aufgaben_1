@@ -1,78 +1,82 @@
 #include<conio.h>
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 
-Board[1200];
+#define Height 20
+#define Lenght 60
 
-init_board(int X, int Y)
+
+//Builds Frame
+init_board(int Board[Height][Lenght])
 {
-	for (int i = 0; i < (X*Y); i++)
+	for (int i = 0; i < Height; i++)
 	{
-		if ((i < X - 1) || (i % X == 0) || (i > (X*Y) - X)|| (i % X == X - 1))
+		for (int f = 0; f < Lenght; f++)
 		{
-			Board[i+1] = 1;
-		}
-		else 
-		{
-			Board[i+1] = 0;
+			if ((i == 0) || (i == Height-1) || (f == 0) || (f == Lenght-1))
+				Board[i][f] = 1;
+			else
+				Board[i][f] = 0;
 		}
 	}
 }
 
-void Blocks(int X, int Y)
+//Adds one block to the Array
+
+void Blocks(int Board[Height][Lenght])
 {
-	int Rand = rand(), r = (Rand % 4) + 3, E=Rand%(X*Y);
-	if (E > (X*Y) - (r * X))
+	int Rand = rand()*clock(), r, X = Rand % Lenght, Y;
+	Rand = rand(), Y = Rand % Height;
+	Rand = rand(), r = (Rand % 4) + 3;
+
+	if (Y > (Height - r))
+		Y = Y - r;
+	for (int f = 0; f < r; f++)
 	{
-		E = E - r * X;
-	}
-	for (int g = 0; g < r; g++)
-	{
-		E = E + X;
 		for (int i = 1; i <= r; i++)
 		{
-			Board[E + i] = Board[E + i] | 1;
+			Board[Y + f][X + i] = Board[Y + f][X + i] || 1;
 		}
 	}
 }
-
 
 
 void main()
 {
+	int Board[Height][Lenght];
 	char c;
-	int X = 60, Y = 20;
+	int X = Lenght, Y = Height;
 	do
 	{
+		//clears the board if you want to print a new one
 		system("cls");
-		init_board(X, Y);
-		for (int i = 1; i <= 20; i++)
+		init_board(Board);
+
+		//runs block-function multiple times
+		for (int i = 1; i <= Height; i++)
 		{
-			Blocks(X, Y);
+			Blocks(Board);
 		}	
-		printer(X, Y);
+		writer(Board);
 
 		printf("another one?(y)");
 		c = _getwch();
 	} while (c == 'y');
 }
 
-int printer(int X,int Y)
+//prints the Board including blocks
+int writer(int Board[Height][Lenght])
 {
-	for (int i = 0; i < X*Y; i++)
+	for (int i = 0; i < Height; i++)
 	{
-		if ((Board[i + 1] == 1)&&(i%X!=X-1))
+		for (int f = 0; f < Lenght; f++)
 		{
-			printf("#");
+			if (Board[i][f] == 1)
+				printf("#");
+			else
+				printf(" ");
 		}
-		else if (Board[i + 1] == 0)
-		{
-			printf(" ");
-		}
-		else 
-		{
-			printf("#\n");
-		}
-		
+		printf("\n");
 	}
 }
