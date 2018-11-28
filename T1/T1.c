@@ -6,9 +6,9 @@
 #define maxpizza 10
 
 char* pizza_names[] = { "Pizza Margherita", "Salami Classico", "Funghi", "Hawaiian Dream" };
-char* pizza_size[] = { "S", "M", "L", "XL", "XXL", "PartySize"};
+char* pizza_size[] = { "S", "M", "L", "XL", "XXL", "Party size"};
 
-enum pizza_name { Margherita, Salami, Funghi, Hawai, numberOfTypes };
+enum pizza_name { Margherita, Salami, Funghi, Hawaii, numberOfTypes };
 enum pizza_size { S, M, L, XL, XXL, PartySize, numberOfSizes };
 
 struct oneOrder
@@ -88,6 +88,7 @@ main()
 		printf("Select Pizza #%d:\n", ordercount + 1);
 		enum pizza_name desiredType = orderType();
 		enum pizza_size desiredSize = ordersize();
+		
 		allOrders[ordercount].PizzaName = desiredType;
 		allOrders[ordercount].PizzaSize = desiredSize;
 
