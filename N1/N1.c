@@ -1,26 +1,30 @@
 #include <conio.h>
 #include <stdio.h>
+#include <string.h>
 
-int combi(char one, char two, char three)
+//print combination of two syllables
+int combi(char string[3][5])
 {
-	for (int i = 0; i < 9; i++)
-	{
-		switch (i%3)
+	for (int i = 0; i < 3; i++)
+		for (int f = 0; f < 3; f++)
 		{
-		case 1: printf("%c", one); break;
+			printf("%s", string[i+1]);
+			printf("%s\n", string[f + 1]);
 		}
-	}
 }
 
 void main()
 {
-	char string1[2], string2[2], string3[2];
-	printf("Enter three syllables...\n first:");
-	scanf("%[^\t\n]", string1);
-	printf("second:");
-	scanf("%[^\t\n]", string2);
-	printf("third");
-	scanf("%[^\t\n]", string3);
-	combi(&string1, &string2, &string3);
+	char string[3][5];
+// get user input
+	printf("Enter syllable #1: ");
+	scanf_s("%s", string[1], 5);
+	printf("Enter syllable #2: ");
+	scanf_s("%s", string[2], 5);
+	printf("Enter syllable #3: ");
+	scanf_s("%s", string[3], 5);
+
+	combi(string);
+
 	_getch();
 }

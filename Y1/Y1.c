@@ -4,17 +4,17 @@
 #include<time.h>
 
 #define Height 20
-#define Lenght 60
+#define Length 60
 
 
 //Builds Frame
-init_board(int Board[Height][Lenght])
+init_board(int Board[Height][Length])
 {
 	for (int i = 0; i < Height; i++)
 	{
-		for (int f = 0; f < Lenght; f++)
+		for (int f = 0; f < Length; f++)
 		{
-			if ((i == 0) || (i == Height-1) || (f == 0) || (f == Lenght-1))
+			if ((i == 0) || (i == Height-1) || (f == 0) || (f == Length-1))
 				Board[i][f] = 1;
 			else
 				Board[i][f] = 0;
@@ -24,19 +24,19 @@ init_board(int Board[Height][Lenght])
 
 //Adds one block to the Array
 
-void Blocks(int Board[Height][Lenght])
+void Blocks(int Board[Height][Length])
 {
-	int Rand = rand()*clock(), r, X = Rand % Lenght, Y;
-	Rand = rand(), Y = Rand % Height;
-	Rand = rand(), r = (Rand % 4) + 3;
+	int Rand = rand(), r = (Rand % 4) + 3, X, Y;
+	
+	Rand = rand()+clock(), X = Rand % (Length - r);
+	Rand = rand()+clock(), Y = Rand % (Height - r);
+		
 
-	if (Y > (Height - r))
-		Y = Y - r;
-	for (int f = 0; f < r; f++)
+	for (int i = 0; i < r; i++)
 	{
-		for (int i = 1; i <= r; i++)
+		for (int f = 0; f < r; f++)
 		{
-			Board[Y + f][X + i] = Board[Y + f][X + i] || 1;
+			Board[Y + i][X + f] = Board[Y + i][X + f] || 1;
 		}
 	}
 }
@@ -44,9 +44,8 @@ void Blocks(int Board[Height][Lenght])
 
 void main()
 {
-	int Board[Height][Lenght];
+	int Board[Height][Length];
 	char c;
-	int X = Lenght, Y = Height;
 	do
 	{
 		//clears the board if you want to print a new one
@@ -54,7 +53,7 @@ void main()
 		init_board(Board);
 
 		//runs block-function multiple times
-		for (int i = 1; i <= Height; i++)
+		for (int i = 0; i < Height; i++)
 		{
 			Blocks(Board);
 		}	
@@ -66,11 +65,11 @@ void main()
 }
 
 //prints the Board including blocks
-int writer(int Board[Height][Lenght])
+int writer(int Board[Height][Length])
 {
 	for (int i = 0; i < Height; i++)
 	{
-		for (int f = 0; f < Lenght; f++)
+		for (int f = 0; f < Length; f++)
 		{
 			if (Board[i][f] == 1)
 				printf("#");

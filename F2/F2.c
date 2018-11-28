@@ -34,30 +34,26 @@ int main()
 	do
 	{
 		//get user input F
-		int enter, out, start, end, one, two;
+		int enter, start, end, one, two;
 		printf("Enter the fib:");
 		scanf_s("%d", &enter);
 
 		//Use recursuve fuction to calculate fibonacci numebr
 		start = clock();
-		out = fibonacci_resurvive(enter);
+		printf("F(%d)\tis according to fibonacci_recursive()\t%d\n",enter, fibonacci_resurvive(enter));
 		end = clock();
-		printf("F(%d)  is according to fibonacci_recursive()%d\n",enter, out);
 		one = end - start;
 
 		//Use loop to calculate fibonacci number
 		start = clock();
-		out = fibonacci_iterative(enter);
+		printf("F(%d)\tis according to fibonacci_iterative()\t%d\n", enter, fibonacci_iterative(enter));
 		end = clock();
-		printf("F(%d)  is according to fibonacci_iterative()%d\n", enter, out);
 		two = end - start;
 		
 		//output of time used to calculate with functions
 		printf("fibonacci_recursive() took %.3fs\n",one/1000.0f);
 		printf("fibonacci_iterative() took %.3fs\n\n",two/1000.0f);
 
-		//loop statement
-		printf("go again?(y)");
 		c = _getwch();
 	} while (c == 'y');
 }
