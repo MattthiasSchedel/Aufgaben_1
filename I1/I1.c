@@ -32,7 +32,6 @@ main() {
 	{
 		nr_lines++;//count lines in textfile
 	}
-	printf("%", f);
 	printf("The file\"%s\" contains: %d lines\n", input, nr_lines);
 	int retcode_fclose = fclose(f);
 	if (retcode_fclose != 0) {

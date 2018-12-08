@@ -1,49 +1,44 @@
 #include "opencv2/opencv.hpp"
 #include <conio.h>
 
-#define ex 500
-#define wy 500
-
-
 using namespace cv;
 using namespace std;
+
+#define PLAYFIELD_WIDTH 800
+#define PLAYFIELD_HEIGHT 800
+
+void draw_line(Mat frame, Point p1, Point p2)
+{
+	float epsilon = 0.001f;
+	Point dirVec = p2 - p1;
+	for (float pos = 0.0; pos <= 1.0; pos += epsilon)
+	{
+		Point p = p1 + pos * dirVec;
+		frame.at<Vec3b>(p) = Vec3b(0, 0, 255);
+	}
+}
 
 
 int main()
 {
-	Mat frame(ex+1, wy+ 1, CV_8UC3);
+	Mat frame(PLAYFIELD_HEIGHT, PLAYFIELD_WIDTH, CV_8UC3);
 
 
-
-	Point p1(00, wy);
-	Point p2(ex, wy);
-
-	frame.at<Vec3b>(p1) = Vec3b(0, 255, 0);
-	frame.at<Vec3b>(p2) = Vec3b(255, 0, 0);
-
-	for(int g=0;g<=(ex/2);g++)
+	for (int i = 1; i < 1000; i++)
 	{
-		for (int i = 0; i <= ex-((ex/2)+g); i++)
-		{
-			float whyy = (((i - (ex / 2))*(i - (ex / 2))) / ex) - (ex / 4);
-			Point p(p1.x + i + g, p1.y + whyy);
-				frame.at<Vec3b>(p) = Vec3b(0, 0, 0);
-				//printf("%.3f\n", whyy);
-		}
+		Point p1(rand() % PLAYFIELD_WIDTH, rand() % PLAYFIELD_HEIGHT);
+		Point p2(rand() % PLAYFIELD_WIDTH, rand() % PLAYFIELD_HEIGHT);
+
+		draw_line(frame, p1, p2);
+
+		imshow("Ballerburg", frame);
+		waitKey(0);
+		//_getch();
 	}
-	for (int g = 0; g <= (ex / 2); g++)
-	{
-		for (int i = (ex / 2)+g; i <= ex ; i++)
-		{
-			float whyy = (((i - (ex / 2))*(i - (ex / 2))) / ex) - (ex / 4);
-			Point p(p1.x + i - g, p1.y + whyy);
-			frame.at<Vec3b>(p) = Vec3b(0, 0, 0);
-			//printf("%.3f\n", whyy);
-		}
-	}
-	//cv::rectangle(frame, Point(0,wy-20), Point(20,wy), cv::Scalar(0, 0, 0), -1);
+
+	//cv::rectangle(frame, Point(50,50), Point(100,100), cv::Scalar(0, 255, 0), -1);
 	int width = frame.cols;
 	int height = frame.rows;
-	imshow("Ballerburg", frame);
-	waitKey(0);
+
+
 }

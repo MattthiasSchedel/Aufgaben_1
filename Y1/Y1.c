@@ -8,7 +8,7 @@
 
 
 //Builds Frame
-init_board(int Board[Height][Length])
+init_board(int Board[][Length])
 {
 	for (int i = 0; i < Height; i++)
 	{
