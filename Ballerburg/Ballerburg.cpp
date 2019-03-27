@@ -1,44 +1,45 @@
 #include "opencv2/opencv.hpp"
 #include <conio.h>
 
+#include "Mountain.h"
+#include "Floor.h"
+#include "BackGround.h"
+
 using namespace cv;
 using namespace std;
 
-#define PLAYFIELD_WIDTH 800
-#define PLAYFIELD_HEIGHT 800
-
-void draw_line(Mat frame, Point p1, Point p2)
-{
-	float epsilon = 0.001f;
-	Point dirVec = p2 - p1;
-	for (float pos = 0.0; pos <= 1.0; pos += epsilon)
-	{
-		Point p = p1 + pos * dirVec;
-		frame.at<Vec3b>(p) = Vec3b(0, 0, 255);
-	}
-}
+#define PLAYFIELD_WIDTH 1500
+#define PLAYFIELD_HEIGHT 1500
+#define FLOORHEIGHT PLAYFIELD_HEIGHT-100
+#define WIDTH PLAYFIELD_WIDTH / 2.5
+#define HEIGHT PLAYFIELD_HEIGHT / 2.5
 
 
 int main()
 {
 	Mat frame(PLAYFIELD_HEIGHT, PLAYFIELD_WIDTH, CV_8UC3);
 
+	BackGround b(1);
+	b.draw(frame);
 
-	for (int i = 1; i < 1000; i++)
-	{
-		Point p1(rand() % PLAYFIELD_WIDTH, rand() % PLAYFIELD_HEIGHT);
-		Point p2(rand() % PLAYFIELD_WIDTH, rand() % PLAYFIELD_HEIGHT);
+	Mountain m(FLOORHEIGHT,
+		PLAYFIELD_WIDTH / 2,
+		(int)((1.0 / 3.0)*PLAYFIELD_WIDTH),
+		PLAYFIELD_HEIGHT / 2);
+	m.draw(frame);
 
-		draw_line(frame, p1, p2);
+	Floor f(FLOORHEIGHT, PLAYFIELD_WIDTH, PLAYFIELD_HEIGHT);
+	f.draw(frame);
 
-		imshow("Ballerburg", frame);
-		waitKey(0);
-		//_getch();
-	}
+	
+	namedWindow("Ballerburg", WINDOW_KEEPRATIO);
+	
+	imshow("Ballerburg",frame);
 
-	//cv::rectangle(frame, Point(50,50), Point(100,100), cv::Scalar(0, 255, 0), -1);
-	int width = frame.cols;
-	int height = frame.rows;
+	cv::resizeWindow("Ballerburg", WIDTH, HEIGHT);
+
+	waitKey(0);
+
 
 
 }
